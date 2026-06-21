@@ -1,6 +1,6 @@
 {
-  "name": "imagescope",
-  "displayName": "ImageScope",
+  "name": "imagescope-viewer",
+  "displayName": "ImageScope Viewer",
   "description": "A lightweight VS Code extension for viewing and analyzing images.",
   "version": "0.1.0",
   "publisher": "lazyblue",
