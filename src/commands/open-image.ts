@@ -54,12 +54,12 @@ export function registerOpenImageCommand(
         return;
       }
 
-      // Open in the active column
-      const doc = await vscode.workspace.openTextDocument(imageUri);
-      await vscode.window.showTextDocument(doc, {
-        viewColumn: vscode.ViewColumn.Active,
-        preview: false,
-      });
+      // Open using the custom editor
+      await vscode.commands.executeCommand(
+        "vscode.open",
+        imageUri,
+        { viewColumn: vscode.ViewColumn.Active, preview: false },
+      );
     },
   );
 }
