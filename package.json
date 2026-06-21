@@ -1,0 +1,117 @@
+{
+  "name": "imagescope",
+  "displayName": "ImageScope",
+  "description": "A lightweight VS Code extension for viewing and analyzing images.",
+  "version": "0.1.0",
+  "publisher": "lazyblue",
+  "engines": {
+    "vscode": "^1.125.0"
+  },
+  "categories": [
+    "Visualization"
+  ],
+  "keywords": [
+    "image",
+    "viewer",
+    "pixel",
+    "inspection",
+    "roi",
+    "histogram",
+    "debug"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LazyBluex/imagescope"
+  },
+  "author": {
+    "name": "ImageScope Contributors"
+  },
+  "license": "MIT",
+  "icon": "resources/imagescope-icon-128.png",
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "imagescope.openImage",
+        "title": "ImageScope: Open Image",
+        "icon": "$(file-media)"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "imagescope.openImage",
+          "when": "resourceExtname =~ /\\.(png|jpg|jpeg|gif|bmp|webp|tiff|tif|ico|svg)$/i",
+          "group": "navigation"
+        }
+      ]
+    },
+    "customEditors": [
+      {
+        "viewType": "imagescope.imageViewer",
+        "displayName": "ImageScope",
+        "selector": [
+          {
+            "filenamePattern": "*.{png,jpg,jpeg,gif,bmp,webp,tiff,tif,ico,svg}"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
+    "configuration": {
+      "title": "ImageScope",
+      "properties": {
+        "imagescope.pixelGrid.maxVisiblePixels": {
+          "type": "number",
+          "default": 32,
+          "minimum": 1,
+          "maximum": 512,
+          "description": "Maximum number of image pixels visible in viewport (per axis) to display the pixel grid. E.g. 32 means the grid appears when <= 32×32 pixels are visible."
+        },
+        "imagescope.roi.color": {
+          "type": "string",
+          "default": "#4CAF50",
+          "description": "ROI selection border color (hex). Supports 6-digit (#RRGGBB) and 8-digit (#RRGGBBAA) formats."
+        },
+        "imagescope.roi.fillColor": {
+          "type": "string",
+          "default": "#4CAF5010",
+          "description": "ROI selection fill color (hex). Supports 6-digit (#RRGGBB) and 8-digit (#RRGGBBAA, where AA is opacity)."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js && npm run build:webview",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:webview": "vite build --config vite.webview.config.ts --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "build:webview": "vite build --config vite.webview.config.ts",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production && npm run build:webview -- --mode production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src --ignore-pattern 'src/webview/**'",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^7.1.2",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.20.0",
+    "@types/vscode": "^1.125.0",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2",
+    "esbuild": "^0.27.3",
+    "eslint": "^9.39.3",
+    "npm-run-all": "^4.1.5",
+    "svelte": "^5.56.3",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.56.1",
+    "vite": "^8.0.16",
+    "vite-plugin-singlefile": "^2.3.3"
+  }
+}

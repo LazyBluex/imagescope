@@ -1,0 +1,27 @@
+:root {
+  --bg: var(--vscode-editor-background, #1e1e1e);
+  --fg: var(--vscode-editor-foreground, #cccccc);
+  --sidebar-bg: var(--vscode-sideBar-background, #252526);
+  --border: var(--vscode-panel-border, #3c3c3c);
+  --hover-bg: var(--vscode-toolbar-hoverBackground, #3c3c3c);
+  --status-bg: var(--vscode-statusBar-background, #007acc);
+  --status-fg: var(--vscode-statusBar-foreground, #ffffff);
+  --font-family: var(--vscode-font-family, sans-serif);
+  --font-size: var(--vscode-font-size, 13px);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+}
